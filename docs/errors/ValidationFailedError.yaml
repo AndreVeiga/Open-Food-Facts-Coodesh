@@ -1,0 +1,14 @@
+title: The provided data is invalid
+properties:
+  tag:
+    type: string
+    title: Error tag
+    description: The type of error
+    example: "VALIDATION_FAILED"
+    enum:
+      - "VALIDATION_FAILED"
+  message:
+    type: string
+    title: Error message
+    description: Describes a message informing a reason for the error
+    example: "Invalid request data"

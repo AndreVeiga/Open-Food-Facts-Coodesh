@@ -1,0 +1,14 @@
+title: "Conflict"
+properties:
+  tag:
+    type: string
+    title: Error tag
+    description: The type of error
+    example: "CONFLICT"
+    enum:
+      - "CONFLICT"
+  message:
+    type: string
+    title: Error message
+    description: Describes a message informing a reason for the error
+    example: "Conflict"

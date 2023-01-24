@@ -1,18 +1,18 @@
 export abstract class CodedError extends Error {
-  code: string;
+  tag: string;
 
   details?: Record<string, any>;
 
-  constructor(code: string, message: string, details?: Record<string, any>) {
+  constructor(tag: string, message: string, details?: Record<string, any>) {
     super(message);
-    this.code = code;
+    this.tag = tag;
     this.details = details;
   }
 
   toJSON() {
     return {
       message: this.message,
-      code: this.code,
+      tag: this.tag,
       details: this.details,
     };
   }

@@ -1,0 +1,14 @@
+title: "Bad Request"
+properties:
+  tag: 
+    type: string
+    title: Error tag
+    description: The type of error
+    example: "BAD_REQUEST"
+    enum:
+      - "BAD_REQUEST"
+  message:
+    type: string
+    title: Error message
+    description: Describes a message informing a reason for the error
+    example: "Invalid request params"

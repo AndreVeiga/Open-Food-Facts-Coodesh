@@ -1,0 +1,19 @@
+nutriscore_score:
+    type: number
+    description: Product nutrition point
+    example: 17
+
+nutriscore_grade:
+  type: string
+  description: Product nutrition rating
+  example: "d"
+
+main_category: 
+    type: string
+    description: Product main category
+    example: "en:madeleines"
+
+image_url: 
+    type: string
+    description: URL picture from product
+    example: "https://static.openfoodfacts.org/images/products/20221126/front_pt.5.400.jpg"

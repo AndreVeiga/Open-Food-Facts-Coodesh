@@ -1,0 +1,14 @@
+title: "Not Found"
+properties:
+  tag:
+    type: string
+    title: Error tag
+    description: The type of error
+    example: "NOT_FOUND"
+    enum:
+      - "NOT_FOUND"
+  message:
+    type: string
+    title: Error message
+    description: Describes a message informing a reason for the error
+    example: "Not found"

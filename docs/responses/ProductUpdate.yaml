@@ -1,0 +1,123 @@
+title: Product Update Response
+properties:
+  code:
+    type: string
+    description: Code unique from product
+    example: "20221126"
+
+  status: 
+    type: string
+    description: Status from product
+    example: "published"
+    enum:
+      - draft
+      - trash 
+      - published
+
+  imported_t: 
+    type: string
+    description: Product import date
+    format: date
+    example: "2020-02-07T16:00:00Z"
+
+  url:
+    type: string
+    description: Product import date 
+    example: "https://world.openfoodfacts.org/product/20221126"
+
+  creator:
+    type: string
+    description: Product creator name 
+    example: "securita"
+
+  created_t:
+    type: number
+    description: Product creation date in numeric format
+    example: 1415302075
+
+  last_modified_t:
+    type: number
+    description: Product last modified date in numeric format 
+    example: 1572265837
+  
+  product_name:
+    type: string
+    description: Product name 
+    example: "Madalenas quadradas"
+
+  quantity:
+    type: string
+    description: Quantity from product 
+    example: "380 g (6 x 2 u.)"
+
+  brands:
+    type: string
+    description: Existing brands on the product
+    example: "La Cestera"
+
+  categories:
+    type: string
+    description: Categories to which the product belongs
+    example: "Lanches comida, Lanches doces, Biscoitos e Bolos, Bolos, Madalenas"
+
+  labels:
+    type: string
+    description: Additional product information
+    example: "Contem gluten, Contém derivados de ovos, Contém ovos"
+
+  cities:
+    type: string
+    description: Product origin information
+    example: "Braga"
+
+  purchase_places:
+    type: string
+    description: Places where products or ingredients are purchased
+    example: "Braga,Portugal"
+
+  stores:
+    type: string
+    description: Store where products or ingredients are purchased
+    example: "Lidl"
+  
+  ingredients_text:
+    type: string
+    description: List of product ingredients
+    example: "farinha de trigo, açúcar, óleo vegetal de girassol, clara de ovo, ovo, humidificante (sorbitol), levedantes químicos (difosfato dissódico, hidrogenocarbonato de sódio), xarope de glucose-frutose, sal, aroma"
+
+  traces:
+    type: string
+    description: Traces of product ingredients
+    example: "Frutos de casca rija,Leite,Soja,Sementes de sésamo,Produtos à base de sementes de sésamo"
+  
+  serving_size:
+    type: string
+    description: Portion per unit of product
+    example: "madalena 31.7 g"
+
+  serving_quantity:
+    type: number
+    description: Portion per unit of product in value numeric
+    example: 31.7
+
+  nutriscore_score:
+    type: number
+    description: Product nutrition point
+    example: 17
+
+  nutriscore_grade:
+    type: string
+    description: Product nutrition rating
+    example: "d"
+
+  main_category: 
+    type: string
+    description: Product main category
+    example: "en:madeleines"
+
+  image_url: 
+    type: string
+    description: URL picture from product
+    example: "https://static.openfoodfacts.org/images/products/20221126/front_pt.5.400.jpg"
+
+  

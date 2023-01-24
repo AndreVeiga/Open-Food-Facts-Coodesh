@@ -4,22 +4,269 @@ info:
   description: CRUD Products
   version: '0.1'
 
-  license:
-    name: Apache 2.0
-    url: 'https://www.apache.org/licenses/LICENSE-2.0'
 servers:
-  production:
-    url: 'https://url_production'
-    protocol: https
-    description: >-
-      url from production, no tokens or ApiKey will be used.
-  development:
-    url: 'http://url_development'
-    protocol: https
-    description: >-
-      url from develoment, no tokens or ApiKey will be used.
-    variables:
-      port:
-        description: Connection port.
-        default: '3000'
-defaultContentType: application/json
+  - description: Development
+    url: https://url_develop
+  - description: Production
+    url: https://url_production
+
+tags:
+  - name: Products
+
+paths:
+  /v1/products:
+    post:
+      tags:
+        - Products
+      description: Create a new product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./request/ProductCreate.yaml"
+
+      responses:
+        201:
+          description: Product response
+          content:
+            application/json:
+              schema:
+                  $ref: "./responses/ProductCreate.yaml"
+              examples:
+                Example 1 - BadRequest:
+                  value:
+                    code: "20221126"
+                    status: "published"
+                    imported_t: "2020-02-07T16:00:00Z"
+                    url: "https://world.openfoodfacts.org/product/20221126"
+                    creator: "securita"
+                    created_t: 1415302075
+                    last_modified_t: 1572265837
+                    product_name: "Madalenas quadradas"
+                    quantity: "380 g (6 x 2 u.)"
+                    brands: "La Cestera"
+                    categories: "Lanches comida, Lanches doces, Biscoitos e Bolos, Bolos, Madalenas"
+                    labels: "Contem gluten, Contém derivados de ovos, Contém ovos"
+                    cities: "Braga"
+                    purchase_places: "Braga,Portugal"
+                    stores: "Lidl"
+                    ingredients_text: "farinha de trigo, açúcar, óleo vegetal de girassol, clara de ovo, ovo, humidificante (sorbitol), levedantes químicos (difosfato dissódico, hidrogenocarbonato de sódio), xarope de glucose-frutose, sal, aroma"
+                    traces: "Frutos de casca rija,Leite,Soja,Sementes de sésamo,Produtos à base de sementes de sésamo"
+                    serving_size: "madalena 31.7 g"
+                    serving_quantity: 31.7
+                    nutriscore_score: 17
+                    nutriscore_grade: "d"
+                    main_category: "en:madeleines"
+                    image_url: "https://static.openfoodfacts.org/images/products/20221126/front_pt.5.400.jpg"
+        400:
+          description: Error with BadRequest
+          content:
+            application/json:
+              schema:
+                  $ref: "./errors/BadRequest.yaml"
+              examples:
+                Example 1 - BadRequest:
+                  value:
+                    tag: "BAD_REQUEST"
+                    message: "Product is not valid"
+
+        409:
+          description: Error with Conflict
+          content:
+            application/json:
+              schema: 
+                $ref: "./errors/Conflict.yaml"
+              examples:
+                Example 1 - Conflict:
+                  value:
+                    tag: "PRODUCT_ALREADY_EXISTS"
+                    message: "Product already exists"
+
+        500:
+          description: Error with Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "./errors/InternalServerError.yaml"
+              examples:
+                Example 1 - InternalServerError:
+                  value:
+                    tag: "INTERNAL_SERVER_ERROR"
+                    message: "Internal Server Error"
+
+  /v1/products/{code}:
+    delete:
+      tags:
+        - Products
+      description: Delete a product
+      parameters:
+        - in: path
+          name: code
+          schema:
+            type: string
+          required: true
+          description: Code from product
+      responses:
+        204:
+          description: Without response
+        404:
+          description: Error not found
+          content:
+            application/json:
+              schema: 
+                $ref: "./errors/NotFound.yaml"
+              examples:
+                Example 1 - Conflict:
+                  value:
+                    tag: "PRODUCT_ALREADY_EXISTS"
+                    message: "Product already exists"
+        500:
+          description: Error with Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: "./errors/InternalServerError.yaml"
+              examples:
+                Example 1 - InternalServerError:
+                  value:
+                    tag: "INTERNAL_SERVER_ERROR"
+                    message: "Internal Server Error"
+    get:
+      tags:
+        - Products
+      description: Search a product
+      parameters:
+        - in: path
+          name: code
+          schema:
+            type: string
+          required: true
+          description: Code from product
+      responses:
+        200:
+          description: Product response
+          content:
+            application/json:
+              schema:
+                  $ref: "./responses/ProductCreate.yaml"
+              examples:
+                Example 1 - BadRequest:
+                  value:
+                    code: "20221126"
+                    status: "published"
+                    imported_t: "2020-02-07T16:00:00Z"
+                    url: "https://world.openfoodfacts.org/product/20221126"
+                    creator: "securita"
+                    created_t: 1415302075
+                    last_modified_t: 1572265837
+                    product_name: "Madalenas quadradas"
+                    quantity: "380 g (6 x 2 u.)"
+                    brands: "La Cestera"
+                    categories: "Lanches comida, Lanches doces, Biscoitos e Bolos, Bolos, Madalenas"
+                    labels: "Contem gluten, Contém derivados de ovos, Contém ovos"
+                    cities: "Braga"
+                    purchase_places: "Braga,Portugal"
+                    stores: "Lidl"
+                    ingredients_text: "farinha de trigo, açúcar, óleo vegetal de girassol, clara de ovo, ovo, humidificante (sorbitol), levedantes químicos (difosfato dissódico, hidrogenocarbonato de sódio), xarope de glucose-frutose, sal, aroma"
+                    traces: "Frutos de casca rija,Leite,Soja,Sementes de sésamo,Produtos à base de sementes de sésamo"
+                    serving_size: "madalena 31.7 g"
+                    serving_quantity: 31.7
+                    nutriscore_score: 17
+                    nutriscore_grade: "d"
+                    main_category: "en:madeleines"
+                    image_url: "https://static.openfoodfacts.org/images/products/20221126/front_pt.5.400.jpg"
+        
+        404:
+          description: Error not found
+          content:
+            application/json:
+              schema: 
+                $ref: "./errors/NotFound.yaml"
+              examples:
+                Example 1 - Conflict:
+                  value:
+                    tag: "PRODUCT_ALREADY_EXISTS"
+                    message: "Product already exists"
+        500:
+          description: Error with Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "./errors/InternalServerError.yaml"
+              examples:
+                Example 1 - InternalServerError:
+                  value:
+                    tag: "INTERNAL_SERVER_ERROR"
+                    message: "Internal Server Error"
+
+    put:
+      tags:
+        - Products
+      description: Update a product
+      parameters:
+        - in: path
+          name: code
+          schema:
+            type: string
+          required: true
+          description: Code from product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./request/ProductUpdate.yaml"
+      responses:
+        200:
+          description: Product response
+          content:
+            application/json:
+              schema:
+                  $ref: "./responses/ProductUpdate.yaml"
+              examples:
+                Example 1 - BadRequest:
+                  value:
+                    code: "20221126"
+                    status: "published"
+                    url: "https://world.openfoodfacts.org/product/20221126"
+                    creator: "securita"
+                    created_t: 1415302075
+                    last_modified_t: 1572265837
+                    product_name: "Madalenas quadradas"
+                    quantity: "380 g (6 x 2 u.)"
+                    brands: "La Cestera"
+                    categories: "Lanches comida, Lanches doces, Biscoitos e Bolos, Bolos, Madalenas"
+                    labels: "Contem gluten, Contém derivados de ovos, Contém ovos"
+                    cities: "Braga"
+                    purchase_places: "Braga,Portugal"
+                    stores: "Lidl"
+                    ingredients_text: "farinha de trigo, açúcar, óleo vegetal de girassol, clara de ovo, ovo, humidificante (sorbitol), levedantes químicos (difosfato dissódico, hidrogenocarbonato de sódio), xarope de glucose-frutose, sal, aroma"
+                    traces: "Frutos de casca rija,Leite,Soja,Sementes de sésamo,Produtos à base de sementes de sésamo"
+                    serving_size: "madalena 31.7 g"
+                    serving_quantity: 31.7
+                    nutriscore_score: 17
+                    nutriscore_grade: "d"
+                    main_category: "en:madeleines"
+                    image_url: "https://static.openfoodfacts.org/images/products/20221126/front_pt.5.400.jpg"
+        
+        404:
+          description: Error not found
+          content:
+            application/json:
+              schema: 
+                $ref: "./errors/NotFound.yaml"
+              examples:
+                Example 1 - Conflict:
+                  value:
+                    tag: "PRODUCT_ALREADY_EXISTS"
+                    message: "Product already exists"
+        500:
+          description: Error with Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "./errors/InternalServerError.yaml"
+              examples:
+                Example 1 - InternalServerError:
+                  value:
+                    tag: "INTERNAL_SERVER_ERROR"
+                    message: "Internal Server Error"

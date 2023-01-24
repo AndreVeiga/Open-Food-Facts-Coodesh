@@ -1,0 +1,98 @@
+title: Update product
+properties:
+  code:
+    type: string
+    description: Code unique from product
+    example: "20221126"
+
+  status: 
+    type: string
+    description: Status from product
+    example: "published"
+    enum:
+      - draft
+      - trash 
+      - published
+
+  url:
+    type: string
+    description: Product import date 
+
+  creator:
+    type: string
+    description: Product creator name 
+
+  created_t:
+    type: number
+    description: Product creation date in numeric format
+
+  last_modified_t:
+    type: number
+    description: Product last modified date in numeric format 
+  
+  product_name:
+    type: string
+    description: Product name 
+    example: "Madalenas quadradas"
+
+  quantity:
+    type: string
+    description: Quantity from product 
+
+  brands:
+    type: string
+    description: Existing brands on the product
+
+  categories:
+    type: string
+    description: Categories to which the product belongs
+
+  labels:
+    type: string
+    description: Additional product information
+
+  cities:
+    type: string
+    description: Product origin information
+
+  purchase_places:
+    type: string
+    description: Places where products or ingredients are purchased
+
+  stores:
+    type: string
+    description: Store where products or ingredients are purchased
+    example: "Lidl"
+  
+  ingredients_text:
+    type: string
+    description: List of product ingredients
+
+  traces:
+    type: string
+    description: Traces of product ingredients
+  
+  serving_size:
+    type: string
+    description: Portion per unit of product
+
+  serving_quantity:
+    type: number
+    description: Portion per unit of product in value numeric
+    example: 31.7
+
+  nutriscore_score:
+    type: number
+    description: Product nutrition point
+
+  nutriscore_grade:
+    type: string
+    description: Product nutrition rating
+
+  main_category: 
+    type: string
+    description: Product main category
+
+  image_url: 
+    type: string
+    description: URL picture from product

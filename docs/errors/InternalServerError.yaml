@@ -1,0 +1,14 @@
+title: "Internal Server Error"
+properties:
+  tag:
+    type: string
+    title: Error tag
+    description: The type of error
+    example: "INTERNAL_SERVER_ERROR"
+    enum:
+      - "INTERNAL_SERVER_ERROR"
+  message:
+    type: string
+    title: Error message
+    description: Describes a message informing a reason for the error
+    example: "Internal Server Error"
