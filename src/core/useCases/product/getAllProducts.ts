@@ -1,7 +1,7 @@
 import Product from '@/core/ports/products'
 import ProductModel from '@/core/models/product';
 
-export default class GetAllProductUseCase {
+export class GetAllProductUseCase {
   private product: Product
   
   public constructor(product: Product) {

@@ -20,9 +20,10 @@ export const create_product_schema = Joi.object({
   ingredients_text: Joi.string(),
   traces: Joi.string(),
   serving_size: Joi.string(),
-  serving_quantity: Joi.string(),
-  nutriscore_score: Joi.string(),
+  serving_quantity: Joi.number(),
+  nutriscore_score: Joi.number(),
   nutriscore_grade: Joi.string(),
   main_category: Joi.string(),
   image_url: Joi.string()
 });
+

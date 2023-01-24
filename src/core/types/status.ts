@@ -1,5 +1,5 @@
 export enum Status {
-  DRAFT = "draft", 
-  TRASH = "trash",
-  PUBLISHED = "published"
+  draft = "draft", 
+  trash = "trash",
+  published = "published"
 }

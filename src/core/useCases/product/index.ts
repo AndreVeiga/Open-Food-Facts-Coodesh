@@ -1,0 +1,5 @@
+export * from '@/core/useCases/product/createProduct'
+export * from '@/core/useCases/product/getAllProducts'
+export * from '@/core/useCases/product/updateProducts'
+export * from '@/core/useCases/product/deleteProduct'
+export * from '@/core/useCases/product/getByCodeProduct'

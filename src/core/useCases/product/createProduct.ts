@@ -1,7 +1,8 @@
 import Product from '@/core/ports/products'
 import ProductModel from '@/core/models/product';
+import { ProductAlreadyExistsError } from '@/core/exceptions';
 
-export default class CreateProductUseCase {
+export class CreateProductUseCase {
   private product: Product
   
   public constructor(product: Product) {
@@ -9,7 +10,19 @@ export default class CreateProductUseCase {
   }
   
   public async create(productModel: ProductModel): Promise<ProductModel> {
-      const product = await this.product.create(productModel);
-      return product
+    await this.validateCreate(productModel)
+    
+    const product = await this.product.create(productModel);
+    return product
+  }
+
+  private async validateCreate(productModel: ProductModel): Promise<void> {
+    const { code } = productModel
+    if (code) {
+      const model = await this.product.findOne({ code })
+      if (model?.code) {
+        throw new ProductAlreadyExistsError()
+      }
+    }
   }
 }

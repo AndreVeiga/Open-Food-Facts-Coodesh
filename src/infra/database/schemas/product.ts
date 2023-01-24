@@ -1,8 +1,11 @@
-import { Schema, model } from 'mongoose'
+import { Schema, model, Document } from 'mongoose'
 import { Status } from '@/core/types/status'
 
+export interface ProductSchemaModel extends Document {
+}
+
 const ProductSchema = new Schema({
-  code: Number,
+  code: String,
   status: {
     type: String,
     enum: Object.values(Status)
@@ -35,4 +38,9 @@ const ProductSchema = new Schema({
   timestamps: true
 })
 
-export default model('product', ProductSchema)
+const productModel = model<ProductSchemaModel>('product', ProductSchema)
+
+ProductSchema.methods.findByCode = function(code: string) {
+}
+
+export default productModel

@@ -2,7 +2,7 @@ import Model from '@/core/models/model'
 import { Status } from '@/core/types/status'
 
 export default class ProductModel extends Model<ProductModel> {
-  public code: Number
+  public code: String
 
   public status: Status
 
