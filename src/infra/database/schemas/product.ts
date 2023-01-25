@@ -1,8 +1,7 @@
 import { Schema, model, Document } from 'mongoose'
 import { Status } from '@/core/types/status'
 
-export interface ProductSchemaModel extends Document {
-}
+export interface ProductSchemaModel extends Document {}
 
 const ProductSchema = new Schema({
   code: String,
@@ -12,10 +11,7 @@ const ProductSchema = new Schema({
   },
   imported_t: Date,
   created_t: Date,
-  last_modified_t: {
-    type: Date, 
-    default: Date.now
-  },
+  last_modified_t: Date,
   url: String,
   creator: String,
   product_name: String,

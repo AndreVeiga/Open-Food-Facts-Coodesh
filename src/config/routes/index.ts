@@ -10,4 +10,7 @@ routes.post("/v1/products", Produtc.create)
 routes.put("/v1/products/:code", Produtc.update)
 routes.delete("/v1/products/:code", Produtc.delete)
 routes.get("/v1/products/:code", Produtc.getByCode)
+
+routes.get("/v1/import/products", Produtc.importData)
+
 export default routes

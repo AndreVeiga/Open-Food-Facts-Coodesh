@@ -21,6 +21,22 @@ export class EnvValidator {
   @IsNotEmpty()
   db_password: string
 
+  @IsNotEmpty()
+  amqp_host: string
+
+  @IsNotEmpty()
+  amqp_user: string
+
+  @IsNotEmpty()
+  amqp_password: string
+
+  @IsInt()
+  @IsNotEmpty()
+  amqp_port: number
+
+  @IsNotEmpty()
+  amqp_v_host: string
+
   constructor(props: any) {
     Object.assign(this, props);
   }

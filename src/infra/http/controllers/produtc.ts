@@ -5,6 +5,7 @@ import { HttpStatus } from '@/infra/http/types/httpStatus'
 import { create_product_schema } from '@/infra/http/schemas'
 import { errorDefault } from '@/infra/shared/error-default'
 import { fields_forbidden } from '@/infra/http/types/fields'
+import { ImportDataIntegration } from '@/infra/integrations/import_data'
 
 import {
   ProductNotFoundError,
@@ -18,6 +19,8 @@ import {
   DeleteProductUseCase,
   GetByCodeProductUseCase
 } from '@/core/useCases/product'
+import { ImportProductUseCase } from '@/core/useCases/product/importProdutcs'
+import { NotificationRabbit } from '@/infra/integrations/amqp'
 
 class ProdutcController {
 
@@ -48,7 +51,7 @@ class ProdutcController {
     const { body } = req
     
     requestValidator(res, create_product_schema, body)
-  
+
     const productUseCase = new CreateProductUseCase(new ProductRepository())
     
     try {
@@ -125,6 +128,18 @@ class ProdutcController {
 
       return errorDefault(res)
     } 
+  }
+
+  public async importData(req: HttpRequest, res: HttpResponse) {
+    const importDataIntegration = new ImportDataIntegration()
+    const importProductUseCase = new ImportProductUseCase(
+      new ProductRepository(),
+      new NotificationRabbit()
+    )
+    
+    importDataIntegration.importData(importProductUseCase)
+
+    res.status(HttpStatus.ACCEPTED).send()
   }
 }
 

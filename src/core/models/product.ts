@@ -2,7 +2,7 @@ import Model from '@/core/models/model'
 import { Status } from '@/core/types/status'
 
 export default class ProductModel extends Model<ProductModel> {
-  public code: String
+  public code: string
 
   public status: Status
 
@@ -12,41 +12,41 @@ export default class ProductModel extends Model<ProductModel> {
 
   public last_modified_t: Date
 
-  public url: String
+  public url: string
 
-  public creator: String
+  public creator: string
 
-  public product_name: String
+  public product_name: string
 
-  public quantity: String
+  public quantity: string
 
-  public brands: String
+  public brands: string
 
-  public categories: String
+  public categories: string
 
-  public labels: String
+  public labels: string
 
-  public cities: String
+  public cities: string
   
-  public purchase_places: String
+  public purchase_places: string
 
-  public stores: String
+  public stores: string
 
-  public ingredients_text: String
+  public ingredients_text: string
 
-  public traces: String
+  public traces: string
 
-  public serving_size: String
+  public serving_size: string
 
   public serving_quantity: Number
 
   public nutriscore_score: Number
 
-  public nutriscore_grade: String
+  public nutriscore_grade: string
 
-  public main_category: String
+  public main_category: string
 
-  public image_url: String
+  public image_url: string
 
   protected validate(props: Partial<ProductModel>): void {
     // Method not implemented

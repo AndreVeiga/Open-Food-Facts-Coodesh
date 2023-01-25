@@ -55,3 +55,11 @@ It is also suggested to run the command
 and access the url http://localhost:8080, where the API documentation will be presented.
 
 Remember that it is not necessary to have the API running (npm run dev, only if you want to make requests through postman) and just the documentation command to view it in the browser of your choice.
+
+### 3° step
+
+For each developed change, it is highly recommended to use the command
+
+> npm run test:unit
+
+to run the unit tests command, verifying that none have errors, as well as that the test coverage remains above 75%.
