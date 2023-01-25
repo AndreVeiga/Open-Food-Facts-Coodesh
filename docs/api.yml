@@ -15,6 +15,53 @@ tags:
 
 paths:
   /v1/products:
+    get:
+      tags:
+        - Products
+      description: Get all products
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: number
+          required: false
+          description: Limit to list from product
+        - in: query
+          name: page
+          schema:
+            type: number
+          required: false
+          description: Page to list from product
+      responses:
+        200:
+          description: Product response
+          content:
+            application/json:
+              schema:
+                  $ref: "./responses/AllProducts.yaml"       
+        404:
+          description: Error not found
+          content:
+            application/json:
+              schema: 
+                $ref: "./errors/NotFound.yaml"
+              examples:
+                Example Conflict:
+                  value:
+                    tag: "PRODUCT_ALREADY_EXISTS"
+                    message: "Product already exists"
+        500:
+          description: Error with Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "./errors/InternalServerError.yaml"
+              examples:
+                Example InternalServerError:
+                  value:
+                    tag: "INTERNAL_SERVER_ERROR"
+                    message: "Internal Server Error"
+
     post:
       tags:
         - Products

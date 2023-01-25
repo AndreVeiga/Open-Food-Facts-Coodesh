@@ -20,9 +20,26 @@ import {
 } from '@/core/useCases/product'
 
 class ProdutcController {
+
   public async index(req: HttpRequest, res: HttpResponse): Promise<HttpResponse> {
+    const { limit, page } = req.query
+
+    if (limit && !Number(limit)) {
+      return res.status(HttpStatus.BAD_REQUEST).send({
+        tag: 'BAD_REQUEST',
+        message: `limit: ${limit} invalid data`
+      })
+    }
+
+    if (page && !Number(page)) {
+      return res.status(HttpStatus.BAD_REQUEST).send({
+        tag: 'BAD_REQUEST',
+        message: `page: ${page} invalid data`
+      })
+    }
+
     const productUseCase = new GetAllProductUseCase(new ProductRepository())
-    const products = await productUseCase.getAll()
+    const products = await productUseCase.getAll(Number(limit), Number(page))
 
     return res.status(HttpStatus.OK).send(products)
   }

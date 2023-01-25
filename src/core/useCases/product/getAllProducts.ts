@@ -1,3 +1,5 @@
+import { env } from "@/config/env"
+
 export class GetAllProductUseCase {
   private product: any
   
@@ -6,7 +8,7 @@ export class GetAllProductUseCase {
   }
   
   public async getAll(limit?: number, page?: number): Promise<any> {
-    const _limite = limit || 1 
+    const _limite = limit || env.limit_from_products
     const _page = page || 1 
     const result = await this.product
       .find(_limite, _page)

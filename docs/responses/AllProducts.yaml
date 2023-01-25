@@ -1,0 +1,14 @@
+title: All Product 
+properties:
+  data:
+    type: array
+    items:
+      $ref: './ProductCreate.yaml'
+  totalPages: 
+    type: number
+    description: total pages in system
+    example: 1
+  currentPage:
+    type: number
+    description: page current
+    example: 1
