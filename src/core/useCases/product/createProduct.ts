@@ -19,7 +19,7 @@ export class CreateProductUseCase {
   private async validateCreate(productModel: ProductModel): Promise<void> {
     const { code } = productModel
     if (code) {
-      const model = await this.product.findOne({ code })
+      const model = await this.product.findByCode(code)
       if (model?.code) {
         throw new ProductAlreadyExistsError()
       }

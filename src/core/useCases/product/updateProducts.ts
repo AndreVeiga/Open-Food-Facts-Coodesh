@@ -9,13 +9,14 @@ export class UpdateProductUseCase {
   }
 
   public async updateByCode(code: string, productModel: Partial<ProductModel>): Promise<ProductModel> {
-    const clause = { code }
-    const product = await this.product.findOne(clause)
+    const product = await this.product.findByCode(code)
 
     if (!product?.code) {
       throw new Error('Missing product')
     }
 
-    return this.product.updateOne(clause, productModel)
+    await this.product.updateOne({ code }, productModel)
+
+    return this.product.findByCode(code)
   }
 }

@@ -1,8 +1,8 @@
 import ProductModel from "@/core/models/product";
 
 export default interface Product {
-  find(clause?: any): Promise<Array<ProductModel>>;
+  find(limit: number, page: number): Promise<Array<ProductModel>>;
   create(productModel: ProductModel): Promise<ProductModel>
-  findOne(model: Partial<ProductModel>): Promise<ProductModel>
-  updateOne(clause: any, productModel: Partial<ProductModel>): Promise<ProductModel>
+  findByCode(code: String): Promise<ProductModel>
+  updateOne(clause: any, productModel: Partial<ProductModel>): Promise<void>
 }

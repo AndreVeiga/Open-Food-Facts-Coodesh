@@ -1,8 +1,16 @@
 import { HttpRequest, HttpResponse } from '@/infra/http'
-import ProductSchema from '@/infra/database/schemas/product'
-import requestValidator from '@/infra/shared/schema'
-import { create_product_schema } from '@/infra/http/schemas/create-product.schema'
+import { ProductRepository } from '@/infra/database/repositories/productRepository'
+import { requestValidator, requestValidatorUpdate } from '@/infra/shared/schema'
 import { HttpStatus } from '@/infra/http/types/httpStatus'
+import { create_product_schema } from '@/infra/http/schemas'
+import { errorDefault } from '@/infra/shared/error-default'
+import { fields_forbidden } from '@/infra/http/types/fields'
+
+import {
+  ProductNotFoundError,
+  ProductAlreadyExistsError
+} from '@/core/exceptions'
+
 import {
   GetAllProductUseCase,
   CreateProductUseCase,
@@ -10,12 +18,10 @@ import {
   DeleteProductUseCase,
   GetByCodeProductUseCase
 } from '@/core/useCases/product'
-import { ProductNotFoundError, ProductAlreadyExistsError } from '@/core/exceptions'
 
 class ProdutcController {
-
   public async index(req: HttpRequest, res: HttpResponse): Promise<HttpResponse> {
-    const productUseCase = new GetAllProductUseCase(ProductSchema as any)
+    const productUseCase = new GetAllProductUseCase(new ProductRepository())
     const products = await productUseCase.getAll()
 
     return res.status(HttpStatus.OK).send(products)
@@ -23,8 +29,10 @@ class ProdutcController {
 
   public async create(req: HttpRequest, res: HttpResponse): Promise<HttpResponse> {
     const { body } = req
+    
     requestValidator(res, create_product_schema, body)
-    const productUseCase = new CreateProductUseCase(ProductSchema as any)
+  
+    const productUseCase = new CreateProductUseCase(new ProductRepository())
     
     try {
       const product = await productUseCase.create(body)
@@ -34,7 +42,7 @@ class ProdutcController {
         return res.status(HttpStatus.CONFLICT).send(err)
       }
 
-      return this.errorDefault(res)
+      return errorDefault(res)
     }
   }
 
@@ -42,9 +50,19 @@ class ProdutcController {
     const { body } = req
     const { code } = req.params
     
-    requestValidator(res, create_product_schema, body)
+    const result = requestValidatorUpdate(fields_forbidden, body, res)
 
-    const productUseCase = new UpdateProductUseCase(ProductSchema as any)
+    if (result.length){
+      return res.status(HttpStatus.BAD_REQUEST).send({
+        tag: 'BAD_REQUEST',
+        message: 'Bad request',
+        details: {
+          fields_forbidden: result
+        }
+      })
+    }
+
+    const productUseCase = new UpdateProductUseCase(new ProductRepository())
 
     try {
       const result = await productUseCase.updateByCode(code, body)
@@ -54,13 +72,14 @@ class ProdutcController {
         return res.status(HttpStatus.NOT_FOUND).send(error)
       }
 
-      return this.errorDefault(res)
+      return errorDefault(res)
     } 
   }
 
   public async getByCode(req: HttpRequest, res: HttpResponse) {
     const { code } = req.params
-    const productUseCase = new GetByCodeProductUseCase(ProductSchema as any)
+    
+    const productUseCase = new GetByCodeProductUseCase(new ProductRepository())
     
     try {
       const result = await productUseCase.getByCode(code)
@@ -70,13 +89,14 @@ class ProdutcController {
         return res.status(HttpStatus.NOT_FOUND).send(error)
       }
 
-      return this.errorDefault(res)
+      return errorDefault(res)
     } 
   }
 
   public async delete(req: HttpRequest, res: HttpResponse) {
     const { code } = req.params
-    const productUseCase = new DeleteProductUseCase(ProductSchema as any)
+    
+    const productUseCase = new DeleteProductUseCase(new ProductRepository())
 
     try {
       const result = await productUseCase.delete(code)
@@ -86,15 +106,8 @@ class ProdutcController {
         return res.status(HttpStatus.NOT_FOUND).send(error)
       }
 
-      return this.errorDefault(res)
+      return errorDefault(res)
     } 
-  }
-
-  private errorDefault(res: HttpResponse): HttpResponse {
-    return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
-      message: 'Internal Server Error',
-      code: 'INTERNAL_SERVER_ERROR'
-    })
   }
 }
 

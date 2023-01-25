@@ -2,7 +2,7 @@ import Joi from 'joi';
 import { Response } from 'express';
 import { HttpStatus } from '@/infra/http/types/httpStatus';
 
-const  requestValidator = (res: Response,schema?: Joi.Schema, body?: any): void => {
+export const  requestValidator = (res: Response, schema?: Joi.Schema, body?: any): void => {
   if (!schema) return undefined;
   if (!body) return undefined;
 
@@ -17,4 +17,10 @@ const  requestValidator = (res: Response,schema?: Joi.Schema, body?: any): void 
   }
 }
 
-export default requestValidator
+export const requestValidatorUpdate = (fields_forbidden: Array<string>, body: any, res: Response): Array<string> => {
+  const result = [] as Array<string>
+  Object.keys(body)
+  .filter((key: string) => fields_forbidden.includes(key))
+  .map((key_forbidden) => result.push(key_forbidden))
+  return result
+}

@@ -10,12 +10,12 @@ export class GetByCodeProductUseCase {
   }
   
   public async getByCode(code: String): Promise<ProductModel> {
-      const product = await this.product.findOne({ code });
+    const product = await this.product.findByCode(code);
       
-      if (!product?.code) {
-        throw new ProductNotFoundError()
-      }
+    if (!product?.code) {
+      throw new ProductNotFoundError()
+    }
 
-      return product
+    return product
   }
 }

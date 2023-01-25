@@ -38,9 +38,6 @@ const ProductSchema = new Schema({
   timestamps: true
 })
 
-const productModel = model<ProductSchemaModel>('product', ProductSchema)
+const productSchemaModel = model<ProductSchemaModel>('product', ProductSchema)
 
-ProductSchema.methods.findByCode = function(code: string) {
-}
-
-export default productModel
+export default productSchemaModel

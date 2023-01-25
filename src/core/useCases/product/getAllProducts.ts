@@ -1,15 +1,16 @@
-import Product from '@/core/ports/products'
-import ProductModel from '@/core/models/product';
-
 export class GetAllProductUseCase {
-  private product: Product
+  private product: any
   
-  public constructor(product: Product) {
+  public constructor(product: any) {
     this.product = product
   }
   
-  public async getAll(): Promise<Array<ProductModel>> {
-      const products = await this.product.find();
-      return products
+  public async getAll(limit?: number, page?: number): Promise<any> {
+    const _limite = limit || 1 
+    const _page = page || 1 
+    const result = await this.product
+      .find(_limite, _page)
+    
+    return result
   }
 }

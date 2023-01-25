@@ -19,7 +19,7 @@ export class DeleteProductUseCase {
   }
 
   private async validateCreate(code: String): Promise<void> {
-    const model = await this.product.findOne({ code })
+    const model = await this.product.findByCode(code)
     if (!model?.code) {
       throw new ProductNotFoundError()
     }
