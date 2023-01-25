@@ -13,9 +13,11 @@ export class ImportProductUseCase {
   
   public async create(productModel: ProductModel): Promise<void> {
     try {
+      /*
       if (true) {
         throw new Error()
       }
+      */
 
       const { code } = productModel
 
