@@ -1,11 +1,12 @@
+import { env } from '@/config/env'
 import mongoose from 'mongoose'
 
 class Database {
   public async connectDatabase(): Promise<void> {
-    const username = "root"
-    const password = "root"
-    const host = "localhost"
-    const port = 27017
+    const username = env.db_user
+    const password = env.db_password
+    const host = env.db_host
+    const port = env.db_port
 
     var conn = `mongodb://${username}:${password}@${host}:${port}`
 

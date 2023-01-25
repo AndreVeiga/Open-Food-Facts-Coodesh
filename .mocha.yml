@@ -1,0 +1,5 @@
+require: ts-node/register
+recursive: true
+reporter: spec
+slow: 500
+timeout: 10000
