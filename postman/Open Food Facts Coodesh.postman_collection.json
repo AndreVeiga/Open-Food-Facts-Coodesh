@@ -1,0 +1,180 @@
+{
+	"info": {
+		"_postman_id": "47b207db-7e4a-47c8-bfff-7dad1b61ae26",
+		"name": "Open Food Facts Coodesh",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Product By Code",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/v1/products/:code",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"v1",
+						"products",
+						":code"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "code",
+							"value": "000000000112"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": \"123456782\",\r\n    \"status\": \"draft\",\r\n    \"imported_t\": \"2023-01-24\",\r\n    \"url\": \"http:www.myurl.com.br\",\r\n    \"creator\": 1,\r\n    \"created_t\": \"2023-01-24\",\r\n    \"last_modified_t\": 1,\r\n    \"product_name\": \"product_name_test\",\r\n    \"quantity\": \"quantity_test\",\r\n    \"brands\": \"brands_test\",\r\n    \"categories\": \"categories_test\",\r\n    \"labels\": \"labels_test\",\r\n    \"cities\": \"cities_test\",\r\n    \"purchase_places\": \"purchase_places_test\",\r\n    \"stores\": \"stores_test\",\r\n    \"ingredients_text\": \"ingredients_text_test\",\r\n    \"traces\": \"traces_test\",\r\n    \"serving_size\": \"serving_size_test\",\r\n    \"serving_quantity\": 1,\r\n    \"nutriscore_score\": 1,\r\n    \"nutriscore_grade\": \"nutriscore_grade_test\",\r\n    \"main_category\": \"main_category_test\",\r\n    \"image_url\": \"http:www.myurl.com.br/assets/image.png\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/v1/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8888/v1/products?limit=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"v1",
+						"products"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "limit",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Product",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/v1/products/000000000112",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"v1",
+						"products",
+						"000000000112"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Product",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"url\": \"http:///iogurt\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/v1/products/:code",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"v1",
+						"products",
+						":code"
+					],
+					"variable": [
+						{
+							"key": "code",
+							"value": "000000000112"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Import Product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/v1/import/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"v1",
+						"import",
+						"products"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
